@@ -3,10 +3,10 @@ import csv
 # List of key values, going to be referring to this a lot
 data = []
 
-
+data_loaded = False
 def data_load():
-    global data
-    data_loaded = False
+    global data, data_loaded
+
 
     while data_loaded is not True:
 
@@ -18,6 +18,7 @@ def data_load():
                 read = csv.DictReader(file)
                 data = list(read)
                 print("The data has been successfully loaded.")
+                data_loaded = True
 
                 break
         except FileNotFoundError:
