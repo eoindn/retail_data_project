@@ -285,7 +285,7 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     ax_hist.set_xlabel("Transaction Value")
     ax_hist.set_ylabel("Frequency")
 
-    canvas_hist = FigureCanvasTkAgg(fig_hist, master=chart_frame2)
+    canvas_hist = FigureCanvasTkAgg(fig_hist, master=chart_frame4)
     canvas_hist_widget = canvas_hist.get_tk_widget()
     canvas_hist_widget.pack(fill='both', expand=True)
 
@@ -321,10 +321,52 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     canvas_line_widget = canvas_line.get_tk_widget()
     canvas_line_widget.pack(fill='both', expand=True)
 
+#----------------Bar chart one-------------------------–#
 
 
 
 
+    locations = ["Rural", "City", "Suburban"]
+
+
+    rural_quantity = [int(row['Quantity']) for row in data if row['StoreLocation'] == 'Rural']
+    city_quantity = [int(row['Quantity']) for row in data if row['StoreLocation'] == 'City Centre']
+    suburban_quantity = [int(row['Quantity']) for row in data if row['StoreLocation'] == 'Suburban']
+
+
+    totals = [sum(rural_quantity), sum(city_quantity), sum(suburban_quantity)]
+
+
+    fig, ax = plt.subplots(figsize=(6, 4))
+    fig.subplots_adjust(left=0.2)
+    plt.title("Quantity Sold Per Location", fontsize=6)
+    ax.set_xlabel("Locations", fontweight='bold', fontsize=6)
+    ax.set_ylabel("Amount Sold", fontweight='bold', fontsize=6)
+    ax.tick_params(axis='both', which='major', labelsize=7)
+
+
+    colors = ['tab:purple', 'tab:red', 'tab:orange']
+
+    # Animation loop
+    artists = []
+    for i in range(1, 101):
+
+        frame_totals = [total * (i / 100) for total in totals]
+        ax.clear()
+        ax.bar(locations, frame_totals, color=colors)
+
+        # Set axis properties (reset due to clear())
+        ax.set_title("Quantity Sold Per Location", fontsize=6)
+        ax.set_xlabel("Locations", fontweight='bold', fontsize=6)
+        ax.set_ylabel("Amount Sold", fontweight='bold', fontsize=6)
+        ax.tick_params(axis='both', which='major', labelsize=7)
+        ax.set_yticks(range(0, max(totals) + 50, 50))
+
+    canvas_barchart = FigureCanvasTkAgg(fig, master=chart_frame2)
+    canvas_barchart_widget = canvas_barchart.get_tk_widget()
+    canvas_barchart_widget.pack(fill='both', expand=True)
+
+    canvas_barchart.draw_idle()
 
 
 create_dashboard()
