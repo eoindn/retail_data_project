@@ -368,5 +368,54 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
 
     canvas_barchart.draw_idle()
 
+    #------------------Bar Chart Two-----------------------------––#
+
+    payment_methods = sorted({row['PaymentMethod'] for row in data})
+    store_locations = sorted({row['StoreLocation'] for row in data})
+
+
+    quant_matrix = [[0 for _ in store_locations] for _ in payment_methods]
+
+
+    for row in data:
+        payment_idx = payment_methods.index(row['PaymentMethod'])
+        location_idx = store_locations.index(row['StoreLocation'])
+        quant_matrix[payment_idx][location_idx] += int(row['Quantity'])
+
+
+    fig, ax = plt.subplots(figsize=(4, 3))
+
+
+    bar_width = 0.15
+    x_positions = list(range(len(store_locations)))
+
+    # For each payment method plot bars adjusting x to the right to create grouped bars per loc
+    for idx, method in enumerate(payment_methods):
+        adjusted_x_positions = [x + idx * bar_width for x in x_positions]
+        ax.bar(adjusted_x_positions, quant_matrix[idx], bar_width, label=method)
+
+
+    ax.set_title("Payment Method by Location", fontsize=6)
+    ax.set_xlabel("Store Locations", fontsize=6)
+    ax.set_ylabel("Quantity Sold", fontsize=6)
+
+
+    centered_ticks = [x + bar_width * (len(payment_methods) - 1) / 2 for x in x_positions]
+    ax.set_xticks(centered_ticks)
+    ax.set_xticklabels(store_locations, rotation=45, ha='right')
+
+
+    ax.legend(fontsize=6, loc="upper left")
+    ax.tick_params(axis='both', which='major', labelsize=6)
+
+
+    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.2)
+
+
+    canvas = FigureCanvasTkAgg(fig, master=chart_frame5)
+    canvas_widget = canvas.get_tk_widget()
+    canvas_widget.pack(fill='both', expand=True)
+
 
 create_dashboard()
