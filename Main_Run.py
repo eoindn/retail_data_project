@@ -1,6 +1,7 @@
 from Summary import *
 from Load_Data import data_load, data_loaded
 from Process import *
+from Login import login_window
 
 
 data_load()
@@ -41,7 +42,7 @@ def terminal_menu():
             if choice == 1:
                 pass
             elif choice == 2:
-                pass
+                login_window()
             elif choice == 3:
                 total_transactions()
             elif choice == 4:

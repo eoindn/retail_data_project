@@ -1,5 +1,4 @@
 from tkinter import *
-# from Load_Data import data_load,data_loaded,data
 from tkinter import PhotoImage
 from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -177,10 +176,10 @@ def create_dashboard():
 
         # ----------------------------------Side Bar Buttons-----------------------------------------–#
 
-        # Buttons made as Ctk buttons  due to buttons not
+        # Buttons made as Labels  due to buttons not
         # -being displayed properly on Mac OS
-        info_button = CTkButton(sidebar, text="Info", corner_radius=32, fg_color="#1e90ff", hover_color="#d7bfdc",
-                                font=("", 13, "bold"))
+        info_button =Label(sidebar, text="Info",  background="#1e90ff",fg = "#ffffff",
+                                font=("", 13, "bold"),width = 12 )
         info_button.place(x=90, y=270)
 
         def info_button_win():
@@ -190,20 +189,18 @@ def create_dashboard():
 
         info_button.bind("<Button-1>", lambda event: info_button_win())
 
-        manage_button = CTkButton(sidebar, text="Manage", font=("", 13, "bold"), corner_radius=32, fg_color="#1e90ff",
-                                  hover_color="#d7bfdc",
-                                  cursor='hand2')
+        manage_button = Label(sidebar, text="Manage", font=("", 13, "bold"), fg="#ffffff",background= "#1e90ff",
+                                  cursor='hand2',width = 12)
+        manage_button.bind("<Button-1>")
         manage_button.place(x=90, y=345)
 
-        exit_button = CTkButton(sidebar, text="Exit Dash", font=("", 13, "bold"), corner_radius=32, fg_color="#1e90ff",
-                                hover_color="#d7bfdc",
-                                cursor="hand2")
+        exit_button = Label(sidebar, text="Exit Dash", font=("", 13, "bold"),  background="#1e90ff", fg = "#ffffff",width = 12)
         exit_button.bind("<Button-1>", lambda event: leave())
         exit_button.place(x=90, y=420)
 
-        dis_csv_button = CTkButton(sidebar, text="Display CSV", font=("", 13, "bold"), corner_radius=32,
-                                   fg_color="#1e90ff", hover_color="#d7bfdc",
-                                   cursor="hand2")
+        dis_csv_button =Label(sidebar, text="Display CSV", font=("", 13, "bold"),
+                                   background="#1e90ff",fg = "#ffffff", cursor="hand2", width = 12)
+
         dis_csv_button.bind("<Button-1>", lambda event: display_table(file_path='sales_data.csv'))
         dis_csv_button.place(x=90, y=495)
 
@@ -418,4 +415,3 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     canvas_widget.pack(fill='both', expand=True)
 
 
-create_dashboard()
