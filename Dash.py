@@ -8,6 +8,7 @@ from customtkinter import *
 from tkinter import messagebox
 from datetime import *
 from matplotlib import animation
+from tax import *
 
 
 data = []
@@ -203,6 +204,11 @@ def create_dashboard():
 
         dis_csv_button.bind("<Button-1>", lambda event: display_table(file_path='sales_data.csv'))
         dis_csv_button.place(x=90, y=495)
+
+        tax_button = Label(sidebar, text = "Show Tax", font = ("",13,"bold"),background="#1e90ff", fg = "#ffffff",
+                           width = 12)
+        tax_button.place(x = 90, y = 565)
+        tax_button.bind("<Button-1>", lambda event: the_tax_window())
 
 
 
