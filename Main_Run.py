@@ -44,11 +44,11 @@ def terminal_menu():
             elif choice == 2:
                 login_window()
             elif choice == 3:
-                total_transactions()
+               print(total_transactions())
             elif choice == 4:
                 print(locations_category())
             elif choice == 5:
-                transactions_for_store()
+                print (transactions_for_store())
             elif choice == 6:
                 transaction_by_id()
             elif choice == 7:
@@ -69,12 +69,12 @@ def terminal_menu():
 
                     print(quantity())
                 elif summary_choice == 5:
-                    print(average())
+                    average()
                 else:
                     print("Please enter a valid number")
 
             elif choice == 10:
-                pass
+                print(all_rev())
 
             elif choice == 11:
                 print("Exiting the program. Goodbye!")

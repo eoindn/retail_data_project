@@ -3,14 +3,17 @@ from Load_Data import data
 
 
 
-
+def total_transactions():
+    return len(data)
 
 
 #----------------------------------------------------------------------------------–––––––––––#
 
 
-def total_transactions():
-    print(len(data))
+def all_rev():
+
+    prices = [float(row['TotalPrice']) for row in data]  # Collect integers directly into a list
+    return sum(prices)  # Sum the list of prices
 
 
 #--------------------------------------------------------------------------------------------#
@@ -65,3 +68,4 @@ def rev_for_location():
     return revenue
 #------------------------------------------------------------------------------------------#
 
+all_rev()

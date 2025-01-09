@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import PhotoImage
+from venv import create
+
 from PIL import Image, ImageTk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
@@ -9,6 +11,7 @@ from tkinter import messagebox
 from datetime import *
 from matplotlib import animation
 from tax import *
+from Process import locations_category, rev_for_location, transactions_for_store, transaction_by_id, total_transactions, all_rev
 
 
 data = []
@@ -131,7 +134,7 @@ def create_dashboard():
         scrolling_motion()
 
     scrolling_text(
-        f"Dash Board for Retail Sales Data      Total Transactions : 500      Total Revenue : £682745.74      Common Method: Mobile Payment @ 26%      Share Price: £2398.43 (-90.04%)     ",
+        f"Dash Board for Retail Sales Data      Total Transactions : {total_transactions()}      Total Revenue : £{all_rev()}      Common Method: Mobile Payment @ 26%      Share Price: £2398.43 (-90.04%)     ",
         speed=3)
 
     # --------------------------------------------------------------------------------------------------#
@@ -214,13 +217,13 @@ def create_dashboard():
 
 
     buttons()
-    create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, chart_frame5)
+    create_the_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, chart_frame5)
     window1.mainloop()
 
 
-# -------------------------------------------------------------------------------------------------#
+# -------------------------Pie Chart One------------------------------------------------------------------------#
 
-def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, chart_frame5):
+def create_the_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, chart_frame5):
     revenue_by_location = {}
     for row in data:
         location = row['StoreLocation']
@@ -237,6 +240,8 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     placed_pie_widget = placed_pie.get_tk_widget()
     placed_pie_widget.place(x=500, y=45)
     # placed_pie_widget.pack(fill=None, expand=False)
+
+    # -----------------------Pie Chart 2--------------------------#
 
     debit = 0
     credit = 0
@@ -262,7 +267,7 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     payments = {"Credit Card": int(credit_perc), "Debit Card": int(deb_perc), "Cash": int(cash_perc),
                 "Mobile": int(mobile_perc)}
 
-    #-----------------------Pie Chart 1--------------------------#
+
 
     fig_pie2 = plt.Figure(figsize=(3, 4), dpi=100)
     ax_pie2 = fig_pie2.add_subplot(111)
@@ -419,5 +424,4 @@ def create_da_charts(chart_frame1, chart_frame2, chart_frame3, chart_frame4, cha
     canvas = FigureCanvasTkAgg(fig, master=chart_frame5)
     canvas_widget = canvas.get_tk_widget()
     canvas_widget.pack(fill='both', expand=True)
-
 
