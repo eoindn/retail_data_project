@@ -71,3 +71,4 @@ def login_window():
 
     app.mainloop()
 
+login_window()

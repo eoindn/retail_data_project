@@ -12,8 +12,10 @@ def total_transactions():
 
 def all_rev():
 
-    prices = [float(row['TotalPrice']) for row in data]  # Collect integers directly into a list
-    return sum(prices)  # Sum the list of prices
+    prices = [float(row['TotalPrice']) for row in data] # Collect integers directly into a list
+
+    total_prof = sum(prices)
+    return f"£{total_prof}"  # Sum the list of prices
 
 
 #--------------------------------------------------------------------------------------------#
@@ -29,7 +31,7 @@ def locations_category():
 #-------------------------------------------------------------------------------------------#
 
 def transactions_for_store():
-    store_location = input("What store location are you looking for?")
+    store_location = input("What store location are you looking for?").title()
     transactions = [row for row in data if row['StoreLocation'] == store_location]
     return transactions
 
@@ -52,7 +54,7 @@ def rev_for_location():
 
     revenue = {}
 
-    loc = input("Enter a Location")
+    loc = input("Enter a Location").title()
 
     for row in data:
         price = float(row['TotalPrice'])
@@ -65,7 +67,8 @@ def rev_for_location():
         revenue[location] = round(revenue[location],2)
 
 
-    return revenue
-#------------------------------------------------------------------------------------------#
 
-all_rev()
+
+    return f"£{revenue}"
+
+#------------------------------------------------------------------------------------------#

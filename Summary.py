@@ -23,7 +23,7 @@ def average():
 
 
 def quantity():
-    store_location = input("Enter a Location")
+    store_location = input("Enter a Location").title()
 
     amount_sold = []
 
@@ -39,7 +39,7 @@ def quantity():
 
 
 def average_satisfaction():
-    store_location = input("Enter a Location")
+    store_location = input("Enter a Location").title()
 
     cus_sat = []
 
@@ -62,7 +62,7 @@ def payment_method():
     cash = 0
     mobile = 0
 
-    store_location = input("Enter a Location")
+    store_location = input("Enter a Location").title()
     for row in data:
         if row['StoreLocation'] == store_location:
             payment_type = str(row["PaymentMethod"])
@@ -93,7 +93,7 @@ def payment_method():
 
 def total_rev_by_store():
 
-    store_location = input("Enter a Location")
+    store_location = input("Enter a Location").title()
 
     revenue_by_location = []
 
